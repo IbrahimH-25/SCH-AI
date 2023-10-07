@@ -45,7 +45,7 @@ class GameController(TwoPlayersGame):
 
 if __name__ == "__main__":
     # Define the algorithm
-    algorithm = Negamax(7)
+    algorithm = Negamax(3)
 
     # Start the game
     GameController([Human_Player(), AI_Player(algorithm)]).play()
