@@ -37,18 +37,34 @@ class PuzzleSolver(SearchProblem):
 
     # Returns an estimate of the distance from a state to 
     # the goal using the manhattan distance
-    def heuristic(self, state):
+    def heuristic1(self, state):
         rows = string_to_list(state)
-
+ 
         distance = 0
+
+        for number in '12345678e':
+            #print(number)
+            row_new, col_new = get_location(rows, number)
+            row_new_goal, col_new_goal = goal_positions[number]
+            #print(type(row_new))
+            #print(row_new, col_new ,row_new_goal, col_new_goal)
+            distance += abs(row_new - row_new_goal) + abs(col_new - col_new_goal)
+
+        return distance
+    
+    #my misplaced tiles code
+    def heuristic1(self,state):
+        h1 = 0
+        rows = string_to_list(state)
 
         for number in '12345678e':
             row_new, col_new = get_location(rows, number)
             row_new_goal, col_new_goal = goal_positions[number]
 
-            distance += abs(row_new - row_new_goal) + abs(col_new - col_new_goal)
-
-        return distance
+            if rows[row_new][col_new] != rows[row_new_goal][col_new_goal]:
+                h1 += 1
+        print(h1)
+        return h1
 
 # Convert list to string
 def list_to_string(input_list):
